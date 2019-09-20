@@ -19,3 +19,11 @@ it("freezes die on click", () => {
   expect(wrapper.state().locked).toContain(true);
 
 })
+
+it("stops at three rolls", () => {
+  let wrapper = mount(<Game />);
+  wrapper.setState({ rollsLeft: 0 });
+  wrapper.find(
+    "button").last().simulate("click");
+  expect(wrapper.state().rollsLeft).toEqual(0);
+});

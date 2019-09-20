@@ -66,15 +66,17 @@ class Game extends Component {
   }
 
   render() {
+    let btn = <button
+    className="Game-reroll"
+    disabled={this.state.locked.every(x => x)}
+    onClick={this.roll}>
+    {this.state.rollsLeft} Rerolls Left
+  </button>
+    let reRolls = (this.state.rollsLeft > 0) ? btn : null;
     return (
       <section>
         <Dice dice={this.state.dice} locked={this.state.locked} toggleLocked={this.toggleLocked} />
-        <button
-          className="Game-reroll"
-          disabled={this.state.locked.every(x => x)}
-          onClick={this.roll}>
-          {this.state.rollsLeft} Rerolls Left
-        </button>
+        {reRolls}
         <ScoreTable doScore={this.doScore} scores={this.state.scores} />
       </section >
     );
