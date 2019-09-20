@@ -32,6 +32,8 @@ class Rule {
     // # times val appears in dice
     return dice.filter(d => d === val).length;
   }
+
+  //TODO: make evalRoll function ? 
 }
 
 
@@ -62,12 +64,21 @@ class SumDistro extends Rule {
 
 class FullHouse {
   // TODO
+
 }
 
 /** Check for small straights. */
 
-class SmallStraight {
+class SmallStraight extends Rule{
   // TODO
+  evalRoll(dice) {
+    const d = new Set(dice);
+    let containNum = d.has(3) && d.has(4)
+
+    return d.size >= 4 && containNum
+      ? this.score
+      : 0;
+  }
 }
 
 /** Check for large straights. */
@@ -106,7 +117,7 @@ const fourOfKind = new SumDistro({ count: 4 });
 const fullHouse = "TODO";
 
 // small/large straights score as 30/40
-const smallStraight = "TODO";
+const smallStraight = new SmallStraight({ score: 30 });;
 const largeStraight = new LargeStraight({ score: 40 });
 
 // yahtzee scores as 50
