@@ -69,15 +69,20 @@ class FullHouse {
 
 /** Check for small straights. */
 
-class SmallStraight extends Rule{
+class SmallStraight extends Rule {
   // TODO
   evalRoll(dice) {
     const d = new Set(dice);
-    let containNum = d.has(3) && d.has(4)
+    let twoToFour = d.has(2) && d.has(3) && d.has(4);
+    let threeToFive = d.has(3) && d.has(4) && d.has(5);
 
-    return d.size >= 4 && containNum
-      ? this.score
-      : 0;
+    if (d.size >= 4 && twoToFour && (d.has(1) || d.has(5))) {
+      return this.score;
+    } else if (d.size >= 4 && threeToFive && (d.has(2) || d.has(6))) {
+      return this.score;
+    } else {
+      return 0
+    }
   }
 }
 
